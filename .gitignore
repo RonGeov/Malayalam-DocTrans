@@ -10,3 +10,10 @@ __pycache__/
 # Flask specific files
 instance/
 .env
+
+# input and result files
+*.pdf
+*.jpg
+*.jpeg
+*.txt
+!requirements.txt
