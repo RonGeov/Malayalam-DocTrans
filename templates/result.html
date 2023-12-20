@@ -2,9 +2,35 @@
 <html>
 <head>
     <title>Translation Result</title>
+    <style>
+        .text-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .text-block {
+            width: 45%;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+    </style>
 </head>
 <body>
     <h1>Translation Result</h1>
-    <p>{{ text }}</p>
+    <div class="text-container">
+        <div class="text-block">
+            <h3>Original Text</h3>
+            <p>{{ original_text }}</p>
+        </div>
+        <div class="text-block">
+            <h3>Translated Text</h3>
+            <p>{{ translated_text }}</p>
+        </div>
+    </div>
 </body>
 </html>

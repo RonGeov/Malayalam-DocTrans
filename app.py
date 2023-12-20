@@ -23,7 +23,7 @@ def translate_malayalam_to_english(file_path):
         extracted_text = pytesseract.image_to_string(image, lang='mal')
         text += extracted_text + ' '
     translated_text = translator.translate(text, src='ml', dest='en').text
-    return translated_text
+    return translated_text, text
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -38,8 +38,8 @@ def index():
             filename = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
-            translated_text = translate_malayalam_to_english(file_path)
-            return translated_text
+            translated_text, original_text = translate_malayalam_to_english(file_path)
+            return render_template('result.html', original_text=original_text, translated_text=translated_text)
     return render_template('index.html')
 
 
