@@ -21,9 +21,6 @@ def home():
         file = request.files['file']
         filename = upload_file(file)
         text = scan_text(filename)
-        #for page in range(len(pdf.pages)):
-        #    text += pdf.pages[page].extract_text()
-        
         translated_text = translator.translate(text, src='ml', dest='en').text
         return render_template('result.html',original_text=text, translated_text=translated_text)
     return render_template('index.html')
