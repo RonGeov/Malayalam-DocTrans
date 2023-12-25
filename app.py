@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from pdf_ocr import scan_text
 from googletrans import Translator
 import os
@@ -24,6 +24,12 @@ def home():
         translated_text = translator.translate(text, src='ml', dest='en').text
         return render_template('result.html',original_text=text, translated_text=translated_text)
     return render_template('index.html')
+
+@app.route('/translate', methods=['POST'])
+def translate():
+    text = request.form['text']
+    translated_text = translator.translate(text, src='ml', dest='en').text
+    return jsonify(original_text=text, translated_text=translated_text)
 
 if __name__ == '__main__':
     app.run(debug=True)

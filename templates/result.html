@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Translation Result</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         .text-container {
             display: flex;
@@ -23,14 +24,26 @@
 <body>
     <h1>Translation Result</h1>
     <div class="text-container">
-        <div class="text-block">
+        <div class="text-block"  id="original_text">
             <h3>Original Text</h3>
-            <p>{{ original_text }}</p>
+            <p contenteditable="true">{{ original_text }}</p>
         </div>
-        <div class="text-block">
+        <div class="text-block" id="translated_text">
             <h3>Translated Text</h3>
-            <p>{{ translated_text }}</p>
+            <p contenteditable="true">{{ translated_text }}</p>
         </div>
     </div>
+    <button id="translate_button">Translate</button>
+    <script>
+        $(document).ready(function(){
+            $("#translate_button").click(function(){
+                var text = $("#original_text p").text();
+                $.post("/translate", {text: text}, function(data){
+                    $("#original_text p").text(data.original_text);
+                    $("#translated_text p").text(data.translated_text);
+});
+            });
+        });
+    </script>
 </body>
 </html>
