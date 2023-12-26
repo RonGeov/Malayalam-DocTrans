@@ -11,7 +11,7 @@ translator = Translator()
 def upload_file(file):
     if file.filename.endswith(".pdf"):
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-        return app.config['UPLOAD_FOLDER'] + "/" + file.filename
+        return f"{app.config['UPLOAD_FOLDER']}/{file.filename}"
     else:
         raise ValueError("not a pdf file")
 
